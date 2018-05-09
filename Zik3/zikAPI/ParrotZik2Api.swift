@@ -59,7 +59,7 @@ class ParrotZik2Api {
 
 
 
-    // MARK: Non Audo properties
+    // MARK: Non Audio properties
     func getAsyncFlightModeStatus() -> Bool {
         return sendRequest(get(ParrotZikEndpoints.FlightModeStatus))
     }

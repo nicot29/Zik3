@@ -20,7 +20,8 @@ class BTConnectionService: BTConnectionServiceInterface {
             fromDevice.register(
                 forDisconnectNotification: self, selector: #selector(disconnected)
             )
-            assert(openConnectionChannel(with: deviceService), "Error Opening connection")
+            let response = openConnectionChannel(with: deviceService)
+            assert(response, "Error Opening connection")
             NSLog("\(fromDevice.name) is Open")
             notificationCenter.post(name: Foundation.Notification.Name(rawValue: "connected"), object: nil)
         }

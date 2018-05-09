@@ -40,7 +40,7 @@ class BTCommunicationService: BTCommunicationServiceInterface, IOBluetoothRFCOMM
                 handle(communication.package!)
             }
         } else if isInitialization(message: message) {
-
+            
             let _ = api.getAsyncApplicationVersion()
             let _ = api.getAsyncNoiseCancellationStatus()
             let _ = api.getAsyncBatteryInfo()
@@ -137,7 +137,8 @@ class BTCommunicationService: BTCommunicationServiceInterface, IOBluetoothRFCOMM
 
     fileprivate func notificationHandler(_ package: AEXMLDocument?) {
         if package != nil {
-            assert(api.sendRequest(package!.root.attributes["path"]!))
+            let response = api.sendRequest(package!.root.attributes["path"]!)
+            assert(response, "Error sending request (notificationHandler)")
         }
     }
 

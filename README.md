@@ -7,3 +7,6 @@ I mostly used the patch proposed here: https://github.com/picaso/parrot-zik-stat
 
 ### AEXM
 The [AEXM library](https://github.com/tadija/AEXML) made by [tadija](https://github.com/tadija) is needed for this project. It is added in the AEXM folder.
+
+## Build
+To build the app you need Xcode, which can be downloaded for free from the Mac AppStore. Once this is installed the remaining step is building the program, by clicking the green play button. 

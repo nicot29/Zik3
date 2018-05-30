@@ -34,9 +34,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc
     func doMenu() {
         if self.deviceState.name == "" {
+            iconOff?.isTemplate = true
+
             statusItem.button?.image = iconOff
         }else{
+            iconOn?.isTemplate = true
             statusItem.button?.image = iconOn
+
         }
         
         let menu = NSMenu(title: "Contextual menu")
@@ -75,6 +79,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                              selector: #selector(self.doMenu),
                              userInfo: nil,
                              repeats: true)
+        
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {

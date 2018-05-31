@@ -74,7 +74,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                               zikResponseHandler: ZikResponseHandler(deviceState: deviceState))
         let _ = BTConnectionService(service: self.service!)
         
-        Timer.scheduledTimer(timeInterval: 60,
+        Timer.scheduledTimer(timeInterval: 1,
                              target: self,
                              selector: #selector(self.doMenu),
                              userInfo: nil,

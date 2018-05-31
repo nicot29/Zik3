@@ -16,6 +16,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let iconOff = NSImage(named: NSImage.Name(rawValue: "disc"))
     let iconOn = NSImage(named: NSImage.Name(rawValue: "conn"))
     
+    var notificationGiven: Bool = false;
+    
     @objc
     func toggleNoiseCancellation(sender: AnyObject) {
         let _ = service?.toggleAsyncNoiseCancellation(!self.deviceState.noiseCancellationEnabled)
@@ -50,6 +52,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menuItem = menu.addItem(withTitle: title, action: nil, keyEquivalent: "")
         menuItem.indentationLevel = 1
         
+        let batterylevel: Int? = Int(self.deviceState.batteryLevel)
+        if batterylevel! < 35 && !notificationGiven  {
+            // Give a notification
+            showNotification(title: "Parrot Zik", body: "Battery is low. Please recharge")
+        }
+        
         title = "Power Source: " + (self.deviceState.batteryStatus == "charging" ? "Power Adapter" : "Battery")
         menuItem = menu.addItem(withTitle: title, action: nil, keyEquivalent: "")
         menuItem.indentationLevel = 1
@@ -67,6 +75,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menuItem = menu.addItem(withTitle: "Quit", action: #selector(self.quit), keyEquivalent: "")
         menuItem.indentationLevel = 1
         statusItem.menu = menu
+        
+    
     }
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -85,5 +95,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
+    
+    func showNotification(title: String, body: String) -> Void {
+        let notification = NSUserNotification()
+        notification.title = title
+        notification.informativeText = body
+        notification.hasActionButton = true
+        notification.actionButtonTitle = "Action Button"
+
+        notification.soundName = NSUserNotificationDefaultSoundName
+
+        notificationGiven = true;
+        NSUserNotificationCenter.default.delegate = self as? NSUserNotificationCenterDelegate
+        NSUserNotificationCenter.default.deliver(notification)
+    }
+    
+    func userNotificationCenter(_ center: NSUserNotificationCenter,
+                                shouldPresent notification: NSUserNotification) -> Bool {
+        return true
+    }
+    
+
     
 }

@@ -53,9 +53,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menuItem.indentationLevel = 1
         
         let batterylevel: Int? = Int(self.deviceState.batteryLevel)
-        if batterylevel! < 35 && !notificationGiven  {
+        
+        if (batterylevel! == 20 || batterylevel! == 10) && !notificationGiven  {
             // Give a notification
             showNotification(title: "Parrot Zik", body: "Battery is low. Please recharge")
+        }
+        if batterylevel! < 20 && batterylevel! > 10 {
+            notificationGiven = false
         }
         
         title = "Power Source: " + (self.deviceState.batteryStatus == "charging" ? "Power Adapter" : "Battery")

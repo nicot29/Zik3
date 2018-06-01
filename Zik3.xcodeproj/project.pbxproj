@@ -133,7 +133,8 @@
 				30CDEE9E209C8ECB00BB63FB /* Parser.swift */,
 				30CDEE9F209C8ECB00BB63FB /* Info.plist */,
 			);
-			path = AEXML;
+			name = AEXML;
+			path = AEXML/Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
